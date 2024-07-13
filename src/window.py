@@ -1,22 +1,11 @@
 import pygame
 from typing import Callable
 from time import time
+from .helpers import nonWorking
 pygame.init()
 
 _keystates: dict[str,bool] = {}
 _lastKeyStates: dict[str, bool] = {}
-
-def nonWorking(reason:str = None):
-    def wrap(fn):
-        def wrapper(*args, **kwargs):
-            # Perform some non-working behavior or logic here
-            if reason:
-                raise NotImplementedError(f"{fn.__name__} is currently not functional, reason: {reason}.")
-            else:
-                raise NotImplementedError(f"{fn.__name__} is currently not functional.")
-            exit(1)
-        return wrapper
-    return wrap
 
 def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     """
