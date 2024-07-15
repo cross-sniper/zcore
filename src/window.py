@@ -2,10 +2,12 @@ import pygame
 from typing import Callable
 from time import time
 from .helpers import nonWorking
+
 pygame.init()
 
-_keystates: dict[str,bool] = {}
+_keystates: dict[str, bool] = {}
 _lastKeyStates: dict[str, bool] = {}
+
 
 def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     """
@@ -19,6 +21,7 @@ def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     pygame.display.set_caption(title)
     return window
 
+
 def isKeyDown(key: str) -> bool:
     """
     Checks if a key is currently pressed down.
@@ -30,6 +33,7 @@ def isKeyDown(key: str) -> bool:
         bool: True if the key is pressed, False otherwise.
     """
     return _keystates.get(key, False)
+
 
 # @nonWorking(reason="the current implementation does not handle checking the actual state of the key")
 def isKeyPressed(key: str) -> bool:
@@ -48,6 +52,7 @@ def isKeyPressed(key: str) -> bool:
 
     # Return True if current state is True and last state is False (key was just pressed)
     return current_state and not last_state
+
 
 def mainLoop(gameLoop: Callable):
     """
