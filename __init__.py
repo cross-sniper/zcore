@@ -3,6 +3,7 @@ from .src import window
 from .src import draw
 from .src import keys
 from .src import mouse
+from .src import obj
 
 # auto-hooks itself
 from . import zen
@@ -12,5 +13,6 @@ __all__ = [
     "window",
     "draw",
     "keys",
-    "mouse"
+    "mouse",
+    "obj"
 ]

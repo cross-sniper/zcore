@@ -7,7 +7,15 @@ pygame.init()
 
 _keystates: dict[str, bool] = {}
 _lastKeyStates: dict[str, bool] = {}
+_running = False
 
+def quit()-> None:
+    global _running
+    """
+    sets running to false
+    and quits the game
+    """
+    _running = False
 
 def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     """
@@ -62,10 +70,10 @@ def mainLoop(gameLoop: Callable):
         gameLoop: A callable that represents the game loop, which takes the delta time as an argument.
     """
     # Main loop
-    _running = True
     dt = 0.1
     lastTime = time()
-
+    global _running
+    _running = True
     while _running:
         # Handle events
         dt = time() - lastTime
