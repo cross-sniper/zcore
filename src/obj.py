@@ -7,8 +7,10 @@ class SpriteObject:
         self.sprite_path = sprite_path
         self.sprite = pygame.image.load(sprite_path)
 
-    def draw(self, surface: pygame.Surface, x: int, y: int):
+    def draw(self, surface: pygame.Surface, x: int, y: int, scaleX: int, scaleY: int):
         pos = Vec2(x, y)
         rect = self.sprite.get_rect(center=(pos.x, pos.y))
 
-        surface.blit(self.sprite, rect.topleft)
+        surface.blit(
+            pygame.transform.scale(self.sprite, (scaleX, scaleY)), rect.topleft
+        )

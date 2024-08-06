@@ -1,6 +1,6 @@
 import pygame
 
-type ColorType = tuple[int,int,int,int] | pygame.Color | str
+type ColorType = tuple[int, int, int, int] | pygame.Color | str
 
 
 def clearBackground(window: pygame.Surface, color: ColorType) -> None:
@@ -13,7 +13,10 @@ def clearBackground(window: pygame.Surface, color: ColorType) -> None:
     """
     window.fill(color)
 
-def drawRect(screen: pygame.Surface, x: int, y: int, width: int, height: int, color: ColorType) -> None:
+
+def fillRect(
+    screen: pygame.Surface, x: int, y: int, width: int, height: int, color: ColorType
+) -> None:
     """
     Draws a rectangle on the screen.
 
@@ -30,7 +33,9 @@ def drawRect(screen: pygame.Surface, x: int, y: int, width: int, height: int, co
     pygame.draw.rect(screen, color, (x, y, width, height))
 
 
-def drawCircle(surface: pygame.Surface, color: ColorType, center: tuple[int, int], radius: int) -> None:
+def fillCircle(
+    surface: pygame.Surface, color: ColorType, center: tuple[int, int], radius: int
+) -> None:
     """
     Draws a filled circle on the surface.
 
@@ -42,7 +47,14 @@ def drawCircle(surface: pygame.Surface, color: ColorType, center: tuple[int, int
     """
     pygame.draw.circle(surface, color, center, radius)
 
-def drawLine(surface: pygame.Surface, color: ColorType, start_pos: tuple[int, int], end_pos: tuple[int, int], width: int = 1) -> None:
+
+def drawLine(
+    surface: pygame.Surface,
+    color: ColorType,
+    start_pos: tuple[int, int],
+    end_pos: tuple[int, int],
+    width: int = 1,
+) -> None:
     """
     Draws a line on the surface.
 
@@ -55,7 +67,10 @@ def drawLine(surface: pygame.Surface, color: ColorType, start_pos: tuple[int, in
     """
     pygame.draw.line(surface, color, start_pos, end_pos, width)
 
-def drawText(window: pygame.Surface,text: str, x: int, y: int, size: int, color: ColorType) -> None:
+
+def drawText(
+    window: pygame.Surface, text: str, x: int, y: int, size: int, color: ColorType
+) -> None:
     """
     Renders text on the surface.
 
@@ -67,6 +82,19 @@ def drawText(window: pygame.Surface,text: str, x: int, y: int, size: int, color:
         size (int): The font size of the text.
         color (ColorType): The color of the text.
     """
-    font = pygame.font.Font(None,size)
+    font = pygame.font.Font(None, size)
     textSurface = font.render(text, True, color)
-    window.blit(textSurface, (x,y))
+    window.blit(textSurface, (x, y))
+
+
+def drawRect(
+    screen: pygame.Surface, x: int, y: int, width: int, height: int, color: ColorType
+) -> None:
+    # this is a rectangle made of lines, no fill
+    pygame.draw.rect(screen, color, (x, y, width, height), 1)
+
+
+def drawCircle(
+    surface: pygame.Surface, color: ColorType, center: tuple[int, int], radius: int
+) -> None:
+    pygame.draw.circle(surface, color, center, radius, 1)
