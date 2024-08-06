@@ -1,15 +1,14 @@
 from .vec2 import Vec2
 import pygame
 
-class Obj:
-    def __init__(self, pos: Vec2):
-        self.pos = pos
 
-class SpriteObject(Obj):
-    def __init__(self, pos, spritePath):
-        super().__init__(pos)
-        self.sprite = pygame.image.load(spritePath)
-        self.rect = self.sprite.get_rect(center=(self.pos.x, self.pos.y))
+class SpriteObject:
+    def __init__(self, sprite_path: str):
+        self.sprite_path = sprite_path
+        self.sprite = pygame.image.load(sprite_path)
 
-    def draw(self, surface):
-        surface.blit(self.sprite, self.rect.topleft)
+    def draw(self, surface: pygame.Surface, x: int, y: int):
+        pos = Vec2(x, y)
+        rect = self.sprite.get_rect(center=(pos.x, pos.y))
+
+        surface.blit(self.sprite, rect.topleft)
