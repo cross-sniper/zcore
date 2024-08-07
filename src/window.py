@@ -5,17 +5,19 @@ from .helpers import nonWorking
 
 pygame.init()
 
-_keystates: dict[str, bool] = {}
-_lastKeyStates: dict[str, bool] = {}
+_keystates: dict[int, bool] = {}
+_lastKeyStates: dict[int, bool] = {}
 _running = False
 
-def quit()-> None:
+
+def quit() -> None:
     global _running
     """
     sets running to false
     and quits the game
     """
     _running = False
+
 
 def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     """
@@ -30,7 +32,7 @@ def createWindow(width: int, height: int, title: str) -> pygame.Surface:
     return window
 
 
-def isKeyDown(key: str) -> bool:
+def isKeyDown(key: int) -> bool:
     """
     Checks if a key is currently pressed down.
 
@@ -44,7 +46,7 @@ def isKeyDown(key: str) -> bool:
 
 
 # @nonWorking(reason="the current implementation does not handle checking the actual state of the key")
-def isKeyPressed(key: str) -> bool:
+def isKeyPressed(key: int) -> bool:
     """
     Checks if the key was just pressed
 
@@ -78,15 +80,16 @@ def mainLoop(gameLoop: Callable):
         # Handle events
         dt = time() - lastTime
         lastTime = time()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 _running = False
             elif event.type == pygame.KEYDOWN:
-                _keystates[event.unicode] = True
-                _lastKeyStates[event.unicode] = False
+                _keystates[event.key] = True
+                _lastKeyStates[event.key] = False
             elif event.type == pygame.KEYUP:
-                _keystates[event.unicode] = False
-                _lastKeyStates[event.unicode] = True
+                _keystates[event.key] = False
+                _lastKeyStates[event.key] = True
 
         gameLoop(dt)
 
